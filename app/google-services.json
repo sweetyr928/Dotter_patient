@@ -1,0 +1,114 @@
+{
+  "project_info": {
+    "project_number": "1095432002191",
+    "firebase_url": "https://doctor-untact-default-rtdb.firebaseio.com",
+    "project_id": "doctor-untact",
+    "storage_bucket": "doctor-untact.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095432002191:android:03bdb205993db31da8aefa",
+        "android_client_info": {
+          "package_name": "com.dotter.doctoruntact"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095432002191-6v787qjc4th2p7vdfvb5o1lnk1u7717v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dotter.doctoruntact",
+            "certificate_hash": "092c90ee6ed480252468aedac76bf517bb44fc36"
+          }
+        },
+        {
+          "client_id": "1095432002191-70038hfi2q2lobiap65kaf3drsrv2u10.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS7gMDyDk5nvTawrsQu5cM7qhRCA_9mM8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095432002191-70038hfi2q2lobiap65kaf3drsrv2u10.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095432002191:android:6c65dc8a975fe822a8aefa",
+        "android_client_info": {
+          "package_name": "com.dotter.patientuntact"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095432002191-6i8ndjcjeok5fn9o4methtcokv172hk3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dotter.patientuntact",
+            "certificate_hash": "092c90ee6ed480252468aedac76bf517bb44fc36"
+          }
+        },
+        {
+          "client_id": "1095432002191-70038hfi2q2lobiap65kaf3drsrv2u10.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS7gMDyDk5nvTawrsQu5cM7qhRCA_9mM8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095432002191-70038hfi2q2lobiap65kaf3drsrv2u10.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095432002191:android:58a12ed9a84d2f55a8aefa",
+        "android_client_info": {
+          "package_name": "gujc.dotterPatient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095432002191-70038hfi2q2lobiap65kaf3drsrv2u10.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS7gMDyDk5nvTawrsQu5cM7qhRCA_9mM8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095432002191-70038hfi2q2lobiap65kaf3drsrv2u10.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
