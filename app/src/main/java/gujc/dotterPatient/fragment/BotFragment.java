@@ -223,7 +223,7 @@ public class BotFragment extends Fragment {
                         break;
                     }
                     case "match": {
-                        button1.setVisibility(View.GONE);
+                        //button1.setVisibility(View.GONE);
                         roomid = firebase.collection("Board").document().getId();
                         CreateBoard(firebase.collection("Board").document(roomid));
                         String strboard = String.valueOf(arrayboard);
