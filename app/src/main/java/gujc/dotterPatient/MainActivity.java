@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private ListenerRegistration listenerRegistration;
     private ViewPager mViewPager;
     private BadgedTabLayout tabLayout;
-    int counter = 1;
+    int counter = 0;
     private String myUid;
 
 
