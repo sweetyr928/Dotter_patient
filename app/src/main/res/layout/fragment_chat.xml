@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
-            android:text="요오오오약"
+            android:text="요약"
             android:visibility="gone"
             android:background="@color/colorWhite"/>
 

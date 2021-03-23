@@ -46,20 +46,21 @@ public class BotFragment extends Fragment {
     private UserModel user;
     private Board board;
     private String fuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    private String mcurrent ="nmtest";
+    private String mcurrent = "nmtest";
     private String ucurrent = "";
     private String bcurrent = "";
     private List<String> arrayboard = new ArrayList<String>();
-    private String doctor="";
-    private String doctorid="";
-    private String hospital="";
-    private String title="";
+    private String doctor = "";
+    private String doctorid = "";
+    private String hospital = "";
+    private String title = "";
     public String roomid;
-    private FirebaseFirestore firebase= FirebaseFirestore.getInstance();
+    private FirebaseFirestore firebase = FirebaseFirestore.getInstance();
     private boolean request;
     ProgressDialog pd1;
 
-    public BotFragment(){}
+    public BotFragment() {
+    }
 
     @NonNull
     @Override
@@ -84,7 +85,7 @@ public class BotFragment extends Fragment {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 user = documentSnapshot.toObject(UserModel.class);
-                Chatbot chatbot = new Chatbot("bot", "안녕하세요"+ user.getUsernm() + "님이 맞나요?");
+                Chatbot chatbot = new Chatbot("bot", "안녕하세요" + user.getUsernm() + "님이 맞나요?");
                 arrayList.add(chatbot);
                 botAdapter.notifyDataSetChanged();
             }
@@ -115,13 +116,14 @@ public class BotFragment extends Fragment {
                         button3.setVisibility(View.VISIBLE);
                         break;
                     }
-                    case "dnl":{
+                    case "dnl": {
                         mcurrent = "head";
                         ucurrent = "머리";
                         bcurrent = "더 자세히 알려주세요2";
                         arrayboard.add(ucurrent);
                         button1.setText("얼굴");
                         button2.setText("얼굴 외");
+                        button3.setVisibility(View.GONE);
                         break;
                     }
                     case "head": {
@@ -129,26 +131,84 @@ public class BotFragment extends Fragment {
                         ucurrent = "얼굴";
                         bcurrent = "더 자세히 알려주세요3";
                         arrayboard.add(ucurrent);
-                        button1.setText("눈");
-                        button2.setText("코");
-                        button3.setText("입");
+                        button1.setText("안과");
+                        button2.setText("이비인후과");
+                        button3.setText("치과");
+                        button3.setVisibility(View.VISIBLE);
                         break;
                     }
                     case "face": {
                         mcurrent = "card";
-                        ucurrent = "눈";
-                        bcurrent = "더 자세히 알려주세요4";
+                        ucurrent = "안과";
+                        bcurrent = "결제";
                         arrayboard.add(ucurrent);
                         button1.setText("결제");
                         break;
                     }
+
+                    //버튼2-1
+                    case "nmno": {
+                        mcurrent = "addman";
+                        ucurrent = "추가";
+                        bcurrent = "미완";
+                        arrayboard.add(ucurrent);
+                        button1.setText("다시 시작");
+                        button2.setVisibility(View.GONE);
+                        button3.setVisibility(View.GONE);
+                        button4.setVisibility(View.GONE);
+                        break;
+                    }
+                    case "dkfo": {
+                        mcurrent = "leg";
+                        ucurrent = "다리";
+                        bcurrent = "더 자세히 알려주세요2";
+                        arrayboard.add(ucurrent);
+                        button1.setText("종아리");
+                        button2.setText("발");
+                        break;
+                    }
+                    case "leg": {
+                        mcurrent = "card";
+                        ucurrent = "종아리";
+                        bcurrent = "결제";
+                        arrayboard.add(ucurrent);
+                        button1.setText("결제");
+                        button2.setVisibility(View.GONE);
+                        button3.setVisibility(View.GONE);
+                        button4.setVisibility(View.GONE);
+                        break;
+                    }
+                    case "ear": {
+                        mcurrent = "card";
+                        ucurrent = "귀";
+                        bcurrent = "결제";
+                        arrayboard.add(ucurrent);
+                        button1.setText("결제");
+                        button2.setVisibility(View.GONE);
+                        button3.setVisibility(View.GONE);
+                        button4.setVisibility(View.GONE);
+                        break;
+                    }
+
+                    //버튼3-1
+                    case "stomach": {
+                        mcurrent = "card";
+                        ucurrent = "윗배";
+                        bcurrent = "결제";
+                        arrayboard.add(ucurrent);
+                        button1.setText("결제");
+                        button2.setVisibility(View.GONE);
+                        button3.setVisibility(View.GONE);
+                        break;
+                    }
+                    //결제
                     case "card": {
                         mcurrent = "cyes";
                         ucurrent = "";
                         bcurrent = "이카드로 진행할까요?";
                         button1.setText("yes");
                         button2.setText("no");
-                        button3.setVisibility(View.GONE);
+                        button2.setVisibility(View.VISIBLE);
                         break;
                     }
                     case "cyes": {
@@ -162,23 +222,24 @@ public class BotFragment extends Fragment {
 
                         break;
                     }
-                    case "match":{
+                    case "match": {
+                        button1.setVisibility(View.GONE);
                         roomid = firebase.collection("Board").document().getId();
                         CreateBoard(firebase.collection("Board").document(roomid));
                         String strboard = String.valueOf(arrayboard);
-                        Map<String,Object> boardcur = new HashMap<>();
-                        boardcur.put("title",strboard);
-                        boardcur.put("id",fuser);
+                        Map<String, Object> boardcur = new HashMap<>();
+                        boardcur.put("title", strboard);
+                        boardcur.put("id", fuser);
                         boardcur.put("timestamp", new Timestamp(new Date()));
-                        boardcur.put("name",user.getUsernm()+" 님");
-                        boardcur.put("match",false);
-                        boardcur.put("request",false);
-                        boardcur.put("doctor","none");
-                        boardcur.put("hospital","none");
-                        boardcur.put("doctorid","none");
-                        boardcur.put("status",1);
-                        boardcur.put("identification",1);
-                        boardcur.put("phoneNum",user.getPhone());
+                        boardcur.put("name", user.getUsernm() + " 님");
+                        boardcur.put("match", false);
+                        boardcur.put("request", false);
+                        boardcur.put("doctor", "none");
+                        boardcur.put("hospital", "none");
+                        boardcur.put("doctorid", "none");
+                        boardcur.put("status", 1);
+                        boardcur.put("identification", 1);
+                        boardcur.put("phoneNum", user.getPhone());
 
                         firebase.collection("Board").document(roomid).set(boardcur)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -196,27 +257,18 @@ public class BotFragment extends Fragment {
                         break;
                     }
                 }
-                if(ucurrent.equals("")){
-                    chatbot = new Chatbot(fuser, ucurrent);
-                    Chatbot chatbot1 = new Chatbot("bot", bcurrent);
+                chatbot = new Chatbot(fuser, ucurrent);
+                Chatbot chatbot1 = new Chatbot("bot", bcurrent);
+                if (ucurrent.equals("")) {
                     arrayList.add(chatbot1);
-                    botAdapter.notifyDataSetChanged();
-                    recyclerView.scrollToPosition(arrayList.size()-1);
-                }else
-                if (bcurrent.equals("")){
-                    chatbot = new Chatbot(fuser, ucurrent);
-                    Chatbot chatbot1 = new Chatbot("bot", bcurrent);
+                } else if (bcurrent.equals("")) {
                     arrayList.add(chatbot);
-                    botAdapter.notifyDataSetChanged();
-                    recyclerView.scrollToPosition(arrayList.size()-1);
-                }else{
-                    chatbot = new Chatbot(fuser, ucurrent);
-                    Chatbot chatbot1 = new Chatbot("bot", bcurrent);
+                } else {
                     arrayList.add(chatbot);
                     arrayList.add(chatbot1);
-                    botAdapter.notifyDataSetChanged();
-                    recyclerView.scrollToPosition(arrayList.size()-1);
                 }
+                botAdapter.notifyDataSetChanged();
+                recyclerView.scrollToPosition(arrayList.size() - 1);
 
 
             }
@@ -230,8 +282,94 @@ public class BotFragment extends Fragment {
                 switch (chatbot.getCurrent()) {
                     case "nmtest": {
                         mcurrent = "nmno";
-                        ucurrent = "아니요";
-                        bcurrent = "끝";
+                        ucurrent = "아니오";
+                        bcurrent = "사람을 추가 할까요?";
+                        arrayboard.add("문진");
+                        button1.setText("추가");
+                        button2.setText("아니오");
+                        break;
+                    }
+                    case "nmno": {
+                        mcurrent = "addman";
+                        ucurrent = "추가";
+                        bcurrent = "";
+                        arrayboard.add(ucurrent);
+                        button1.setText("추가");
+                        button2.setVisibility(View.GONE);
+                        button3.setVisibility(View.GONE);
+                        button4.setVisibility(View.GONE);
+                        break;
+                    }
+                    case "nmyes": {
+                        mcurrent = "dkfo";
+                        ucurrent = "하체";
+                        bcurrent = "더 자세히 알려주세요1";
+                        arrayboard.add(ucurrent);
+                        button1.setText("다리");
+                        button2.setText("발");
+                        break;
+                    }
+                    case "dkfo": {
+                        mcurrent = "card";
+                        ucurrent = "발";
+                        bcurrent = "결제";
+                        arrayboard.add(ucurrent);
+                        button1.setText("결제");
+                        button2.setVisibility(View.GONE);
+                        button3.setVisibility(View.GONE);
+                        button4.setVisibility(View.GONE);
+                        break;
+                    }
+                    case "dnl": {
+                        mcurrent = "card";
+                        ucurrent = "가슴";
+                        bcurrent = "결제";
+                        arrayboard.add(ucurrent);
+                        button1.setText("결제");
+                        button2.setVisibility(View.GONE);
+                        button3.setVisibility(View.GONE);
+                        button4.setVisibility(View.GONE);
+                        break;
+                    }
+                    case "head": {
+                        mcurrent = "card";
+                        ucurrent = "얼굴 외";
+                        bcurrent = "결제";
+                        arrayboard.add(ucurrent);
+                        button1.setText("결제");
+                        button2.setVisibility(View.GONE);
+                        button3.setVisibility(View.GONE);
+                        break;
+                    }
+                    case "face": {
+                        mcurrent = "card";
+                        ucurrent = "이비인후과";
+                        bcurrent = "결제";
+                        arrayboard.add(ucurrent);
+                        button1.setText("결제");
+                        button2.setVisibility(View.GONE);
+                        button3.setVisibility(View.GONE);
+                        break;
+                    }
+                    case "stomach": {
+                        mcurrent = "card";
+                        ucurrent = "아랫배";
+                        bcurrent = "결제";
+                        arrayboard.add(ucurrent);
+                        button1.setText("결제");
+                        button2.setVisibility(View.GONE);
+                        button3.setVisibility(View.GONE);
+                        break;
+                    }
+                    case "card": {
+                        ucurrent = "cno";
+                        bcurrent = "카드등록";
+                        mcurrent = "카드등록";
+                        button1.setText("카드등록하기");
+                        button2.setVisibility(View.GONE);
+                        button3.setVisibility(View.GONE);
+                        button4.setVisibility(View.GONE);
+
                         break;
                     }
                     default: {
@@ -240,9 +378,61 @@ public class BotFragment extends Fragment {
                 }
                 chatbot = new Chatbot(fuser, ucurrent);
                 Chatbot chatbot1 = new Chatbot("bot", bcurrent);
-                arrayList.add(chatbot);
-                arrayList.add(chatbot1);
+                if (ucurrent.equals("")) {
+                    arrayList.add(chatbot1);
+                } else if (bcurrent.equals("")) {
+                    arrayList.add(chatbot);
+                } else {
+                    arrayList.add(chatbot);
+                    arrayList.add(chatbot1);
+                }
                 botAdapter.notifyDataSetChanged();
+                recyclerView.scrollToPosition(arrayList.size() - 1);
+            }
+        });
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Chatbot chatbot = new Chatbot(fuser, mcurrent);
+                switch (chatbot.getCurrent()) {
+                    case "dnl": {
+                        mcurrent = "stomach";
+                        ucurrent = "배";
+                        bcurrent = "더 자세히 알려주세요2";
+                        arrayboard.add(ucurrent);
+                        button1.setText("윗배");
+                        button2.setText("아랫배");
+                        button3.setVisibility(View.GONE);
+                        break;
+                    }
+                    case "face": {
+                        mcurrent = "card";
+                        ucurrent = "치과";
+                        bcurrent = "결제";
+                        arrayboard.add(ucurrent);
+                        button1.setText("결제");
+                        button2.setVisibility(View.GONE);
+                        button3.setVisibility(View.GONE);
+                        break;
+                    }
+
+                    default: {
+                        break;
+                    }
+                }
+                chatbot = new Chatbot(fuser, ucurrent);
+                Chatbot chatbot1 = new Chatbot("bot", bcurrent);
+                if (ucurrent.equals("")) {
+                    arrayList.add(chatbot1);
+                } else if (bcurrent.equals("")) {
+                    arrayList.add(chatbot);
+                } else {
+                    arrayList.add(chatbot);
+                    arrayList.add(chatbot1);
+                }
+                botAdapter.notifyDataSetChanged();
+                recyclerView.scrollToPosition(arrayList.size() - 1);
             }
         });
 
@@ -261,8 +451,7 @@ public class BotFragment extends Fragment {
         });
     }
 
-    private void toDialog()
-    {
+    private void toDialog() {
         final DocumentReference docRef = firebase.collection("Board").document(roomid);
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -280,10 +469,10 @@ public class BotFragment extends Fragment {
                 doctorid = board.getDoctorid();
                 title = board.getTitle();
 
-                if(request) {
+                if (request) {
                     pd1.dismiss();
                     CustomDialog customDialog = new CustomDialog(getContext());
-                    customDialog.callFunction(roomid,doctor,hospital,doctorid,title);
+                    customDialog.callFunction(roomid, doctor, hospital, doctorid, title);
                 }
             }
         });
