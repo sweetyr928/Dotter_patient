@@ -19,6 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+
+import gujc.dotterPatient.LoginActivity;
 import gujc.dotterPatient.R;
 import gujc.dotterPatient.UserPWActivity;
 import gujc.dotterPatient.common.Util9;
@@ -63,6 +65,8 @@ public class UserFragment extends Fragment {
         saveBtn.setOnClickListener(saveBtnClickListener);
         Button changePWBtn = view.findViewById(R.id.changePWBtn);
         changePWBtn.setOnClickListener(changePWBtnClickListener);
+        Button LogOutBtn = view.findViewById(R.id.logOutBtn);
+        LogOutBtn.setOnClickListener(logoutBtnClickListener);
 
         getUserInfoFromServer();
         return view;
@@ -149,6 +153,14 @@ public class UserFragment extends Fragment {
     Button.OnClickListener changePWBtnClickListener = new View.OnClickListener() {
         public void onClick(final View view) {
             startActivity(new Intent(getActivity(), UserPWActivity.class));
+        }
+    };
+
+    Button.OnClickListener logoutBtnClickListener = new View.OnClickListener() {
+        public void onClick(final View view) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
         }
     };
 
