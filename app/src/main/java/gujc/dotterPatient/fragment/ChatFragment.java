@@ -1,9 +1,11 @@
 package gujc.dotterPatient.fragment;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -107,6 +109,7 @@ public class ChatFragment extends Fragment {
     private String myUid;
     private String toUid;
     private String toTitle;
+    private String toPhone;
     private Map<String, UserModel> userList = new HashMap<>();
 
     private ListenerRegistration listenerRegistration;
@@ -117,18 +120,17 @@ public class ChatFragment extends Fragment {
     private ProgressDialog progressDialog = null;
     private Integer userCount = 0;
     private String broomid = null;
-    int identificationStatus = 0;
-    private String phoneNum = "";
 
     public ChatFragment() {
     }
 
-    public static final ChatFragment getInstance(String toUid, String roomID, String toTitle) {
+    public static final ChatFragment getInstance(String toUid, String roomID, String toTitle,String toPhone) {
         ChatFragment f = new ChatFragment();
         Bundle bdl = new Bundle();
         bdl.putString("toUid", toUid);
         bdl.putString("roomID", roomID);
         bdl.putString("toTitle", toTitle);
+        bdl.putString("toPhone",toPhone);
         f.setArguments(bdl);
         return f;
     }
@@ -161,6 +163,7 @@ public class ChatFragment extends Fragment {
             roomID = getArguments().getString("roomID");
             toUid = getArguments().getString("toUid");
             toTitle = getArguments().getString("toTitle");
+            toPhone = getArguments().getString("toPhone");
         }
 
         firestore = FirebaseFirestore.getInstance();
@@ -222,7 +225,6 @@ public class ChatFragment extends Fragment {
             }
         });
 
-
         //문진요약
         TextView btitle = view.findViewById(R.id.btitle);
         final TextView bresult = view.findViewById(R.id.bresult);
@@ -253,6 +255,52 @@ public class ChatFragment extends Fragment {
         });
 
         return view;
+    }
+
+    void phoneRequest()
+    {
+        final DocumentReference rooms = firestore.collection("rooms").document(roomID);
+        rooms.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable final DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    return;
+                }
+
+                ChatRoomModel chatRoomModel = snapshot.toObject(ChatRoomModel.class);
+                int request = chatRoomModel.getIdentification();
+
+                if(request==2)
+                {
+                    AlertDialog.Builder oDialog = new AlertDialog.Builder(getContext(),
+                            android.R.style.Theme_DeviceDefault_Light_Dialog);
+
+                    oDialog.setMessage("전화를 통해 본인확인을 요청하였습니다. 수락하시겠습니까?")
+                            .setTitle("      개인정보 요청알림")
+                            .setPositiveButton("아니오", new DialogInterface.OnClickListener()
+                            {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which)
+                                {
+                                    Log.i("Dialog", "취소");
+                                    snapshot.getReference().update("request",4);
+                                }
+                            })
+                            .setNeutralButton("예", new DialogInterface.OnClickListener()
+                            {
+                                public void onClick(DialogInterface dialog, int which)
+                                {
+
+                                    snapshot.getReference().update("request",3);
+                                }
+                            })
+                            .setCancelable(false) // 백버튼으로 팝업창이 닫히지 않도록 한다.
+                            .show();
+                }
+
+            }
+        });
     }
 
     @Override
@@ -322,6 +370,7 @@ public class ChatFragment extends Fragment {
                 }
                 //users.put(myUid, (long) 0);
                 //document.getReference().update("users", users);
+
             }
         });
     }
@@ -354,6 +403,8 @@ public class ChatFragment extends Fragment {
         data.put("title", null);
         data.put("users", users);
         data.put("board", toTitle);
+        data.put("phone",toPhone);
+        data.put("request",1);
 
         room.set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
