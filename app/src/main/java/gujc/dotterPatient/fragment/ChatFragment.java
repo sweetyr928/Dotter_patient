@@ -113,7 +113,8 @@ public class ChatFragment extends Fragment {
     private Map<String, UserModel> userList = new HashMap<>();
 
     private ListenerRegistration listenerRegistration;
-    private FirebaseFirestore firestore=null;
+    private FirebaseFirestore firestore;
+    private FirebaseFirestore db;
     private StorageReference storageReference;
     private LinearLayoutManager linearLayoutManager;
 
@@ -253,12 +254,13 @@ public class ChatFragment extends Fragment {
                 }
             }
         });
-
+        
         return view;
     }
 
     void phoneRequest()
     {
+        System.out.print("phoneRequest start");
         final DocumentReference rooms = firestore.collection("rooms").document(roomID);
         rooms.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -269,7 +271,7 @@ public class ChatFragment extends Fragment {
                 }
 
                 ChatRoomModel chatRoomModel = snapshot.toObject(ChatRoomModel.class);
-                int request = chatRoomModel.getIdentification();
+                int request = chatRoomModel.getRequest();
 
                 if(request==2)
                 {

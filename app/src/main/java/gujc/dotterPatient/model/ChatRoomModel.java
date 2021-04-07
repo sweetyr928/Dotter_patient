@@ -9,17 +9,18 @@ public class ChatRoomModel {
     private Integer userCount;
     private Integer unreadCount;
     private String board;
-    private int identification; // 1: 등록 2: 수락 대기 중 3: 수락
+    private int request;
     private String phone;
 
     public String getPhone() { return phone; }
 
     public void setPhone(String phone) { this.phone = phone; }
 
-    public int getIdentification() { return identification; }
+    public void setRequest(int request) {
+    }
 
-    public void setIdentification(int identification) {
-        this.identification = identification;
+    public int getRequest() {
+        return request;
     }
 
     public String getRoomID() {

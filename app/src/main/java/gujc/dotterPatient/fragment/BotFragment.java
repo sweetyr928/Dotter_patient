@@ -239,7 +239,6 @@ public class BotFragment extends Fragment {
                         boardcur.put("hospital", "none");
                         boardcur.put("doctorid", "none");
                         boardcur.put("status", 1);
-                        boardcur.put("identification", 1);
                         boardcur.put("phoneNum", user.getPhone());
 
                         firebase.collection("Board").document(roomid).set(boardcur)
