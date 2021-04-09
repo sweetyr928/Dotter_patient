@@ -38,7 +38,7 @@ public class ChartinfoActivity extends AppCompatActivity {
 
         doctor.setText(getIntent().getStringExtra("doctor"));
         hospital.setText(getIntent().getStringExtra("hospital"));
-        timestamp.setText(getIntent().getStringExtra("timestamp"));
+        timestamp.setText("진료시간 " + getIntent().getStringExtra("timestamp"));
         board.setText(getIntent().getStringExtra("board"));
 
 

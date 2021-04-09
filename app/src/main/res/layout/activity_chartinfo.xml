@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="10dp"
+    android:padding="20dp"
     tools:context=".ChartinfoActivity">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -16,6 +16,7 @@
             android:id="@+id/doctor"
             android:hint="의사이름"
             android:inputType="text"
+            android:textSize="35dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -27,6 +28,7 @@
             android:id="@+id/hospital"
             android:hint="병원이름"
             android:inputType="text"
+            android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -38,9 +40,19 @@
             android:id="@+id/timestamp"
             android:hint="진료일"
             android:inputType="text"
+            android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/darker_gray" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width = "match_parent"
@@ -49,6 +61,7 @@
             android:id="@+id/board"
             android:hint="증상"
             android:inputType="text"
+            android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -60,13 +73,36 @@
             android:id="@+id/chartnote"
             android:hint="진료노트"
             android:inputType="text"
+            android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/darker_gray" />
+
     <Button
         android:id="@+id/receipt"
-        android:text="영수증발행"
+        android:text="영수증 발행"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/darker_gray" />
+
+    <Button
+        android:id="@+id/deleteBoard"
+        android:text="진료내역 삭제"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

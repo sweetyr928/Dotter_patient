@@ -107,7 +107,7 @@ public class ChartFragment extends Fragment {
             final DocumentSnapshot documentSnapshot = getSnapshot(position);
             final Board board = documentSnapshot.toObject(Board.class);
 
-            holder.name.setText(board.getDoctor()+"선생님");
+            holder.name.setText(board.getDoctor()+" 선생님");
             timestamp1 = simpleDateFormat.format(board.getTimestamp());
             holder.timestamp.setText(timestamp1);
 
