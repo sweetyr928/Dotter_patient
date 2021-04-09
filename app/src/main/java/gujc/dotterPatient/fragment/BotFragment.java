@@ -54,6 +54,7 @@ public class BotFragment extends Fragment {
     private String doctorid = "";
     private String hospital = "";
     private String title = "";
+    private String phoneNum = "";
     public String roomid;
     private FirebaseFirestore firebase = FirebaseFirestore.getInstance();
     private boolean request;
@@ -240,7 +241,6 @@ public class BotFragment extends Fragment {
                         boardcur.put("hospital", "none");
                         boardcur.put("doctorid", "none");
                         boardcur.put("status", 1);
-                        boardcur.put("identification", 1);
                         boardcur.put("phoneNum", user.getPhone());
 
                         firebase.collection("Board").document(roomid).set(boardcur)
@@ -470,11 +470,12 @@ public class BotFragment extends Fragment {
                 request = board.isRequest();
                 doctorid = board.getDoctorid();
                 title = board.getTitle();
+                phoneNum = board.getPhoneNum();
 
                 if (request) {
                     pd1.dismiss();
                     CustomDialog customDialog = new CustomDialog(getContext());
-                    customDialog.callFunction(roomid, doctor, hospital, doctorid, title);
+                    customDialog.callFunction(roomid, doctor, hospital, doctorid, title,phoneNum);
                 }
             }
         });

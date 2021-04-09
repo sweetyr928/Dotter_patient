@@ -23,6 +23,7 @@ public class CustomDialog extends Dialog{
     String doctoruid="";
     String documentid="";
     String documenttitle="";
+    String phone="";
     private Board board;
 
 
@@ -32,7 +33,7 @@ public class CustomDialog extends Dialog{
     }
 
     // 호출할 다이얼로그 함수를 정의
-    public void callFunction(String docid,String doctor,String hospital,String doctorid,String title) {
+    public void callFunction(String docid,String doctor,String hospital,String doctorid,String title,String phoneNum) {
 
         final Dialog dlg = new Dialog(context);
 
@@ -53,6 +54,7 @@ public class CustomDialog extends Dialog{
         doctoruid = doctorid;
         documentid = docid;
         documenttitle = title;
+        phone = phoneNum;
 
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +64,7 @@ public class CustomDialog extends Dialog{
                 intent.putExtra("toUid", doctoruid);
                 intent.putExtra("roomID",documentid);
                 intent.putExtra("toTitle", documenttitle);
+                intent.putExtra("toPhone",phone);
                 getContext().startActivity(intent);
                 Toast.makeText(getContext(),"채팅방에 입장하였습니다!",Toast.LENGTH_LONG).show();
                 dlg.dismiss();

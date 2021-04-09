@@ -36,6 +36,7 @@ public class ChatActivity extends AppCompatActivity {
         String toUid = getIntent().getStringExtra("toUid");
         final String roomID = getIntent().getStringExtra("roomID");
         String toTitle = getIntent().getStringExtra("toTitle");
+        String toPhone = getIntent().getStringExtra("toPhone");
         String roomTitle = getIntent().getStringExtra("roomTitle");
         if (roomTitle!=null) {
             actionBar.setTitle(roomTitle);
@@ -61,7 +62,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
         // chatting area
-        chatFragment = ChatFragment.getInstance(toUid, roomID,toTitle);
+        chatFragment = ChatFragment.getInstance(toUid, roomID,toTitle,toPhone);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.mainFragment, chatFragment )
