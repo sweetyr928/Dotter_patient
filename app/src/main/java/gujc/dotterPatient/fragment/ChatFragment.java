@@ -1,9 +1,11 @@
 package gujc.dotterPatient.fragment;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -91,7 +93,6 @@ import okhttp3.Response;
 import static android.app.Activity.RESULT_OK;
 
 public class ChatFragment extends Fragment {
-    //브랜치 테스트1
     private static final int PICK_FROM_ALBUM = 1;
     private static final int PICK_FROM_FILE = 2;
     private static String rootPath = Util9.getRootPath() + "/DirectTalk9/";
@@ -107,28 +108,29 @@ public class ChatFragment extends Fragment {
     private String myUid;
     private String toUid;
     private String toTitle;
+    private String toPhone;
     private Map<String, UserModel> userList = new HashMap<>();
 
     private ListenerRegistration listenerRegistration;
-    private FirebaseFirestore firestore=null;
+    private FirebaseFirestore firestore;
     private StorageReference storageReference;
     private LinearLayoutManager linearLayoutManager;
 
     private ProgressDialog progressDialog = null;
     private Integer userCount = 0;
     private String broomid = null;
-    int identificationStatus = 0;
-    private String phoneNum = "";
+    public int request = 0;
 
     public ChatFragment() {
     }
 
-    public static final ChatFragment getInstance(String toUid, String roomID, String toTitle) {
+    public static final ChatFragment getInstance(String toUid, String roomID, String toTitle,String toPhone) {
         ChatFragment f = new ChatFragment();
         Bundle bdl = new Bundle();
         bdl.putString("toUid", toUid);
         bdl.putString("roomID", roomID);
         bdl.putString("toTitle", toTitle);
+        bdl.putString("toPhone",toPhone);
         f.setArguments(bdl);
         return f;
     }
@@ -137,7 +139,6 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
-
         recyclerView = view.findViewById(R.id.recyclerView);
         linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -161,6 +162,7 @@ public class ChatFragment extends Fragment {
             roomID = getArguments().getString("roomID");
             toUid = getArguments().getString("toUid");
             toTitle = getArguments().getString("toTitle");
+            toPhone = getArguments().getString("toPhone");
         }
 
         firestore = FirebaseFirestore.getInstance();
@@ -222,7 +224,6 @@ public class ChatFragment extends Fragment {
             }
         });
 
-
         //문진요약
         TextView btitle = view.findViewById(R.id.btitle);
         final TextView bresult = view.findViewById(R.id.bresult);
@@ -251,8 +252,54 @@ public class ChatFragment extends Fragment {
                 }
             }
         });
-
         return view;
+    }
+
+    void phoneRequest()
+    {
+        System.out.print("phoneRequest start");
+        final DocumentReference rooms = firestore.collection("rooms").document(roomID);
+        rooms.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable final DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    return;
+                }
+
+                ChatRoomModel chatRoomModel = snapshot.toObject(ChatRoomModel.class);
+                request = chatRoomModel.getIdrequest();
+
+                if(request==2)
+                {
+                    AlertDialog.Builder oDialog = new AlertDialog.Builder(getContext(),
+                            android.R.style.Theme_DeviceDefault_Light_Dialog);
+
+                    oDialog.setMessage("전화를 통해 본인확인을 요청하였습니다. 수락하시겠습니까?")
+                            .setTitle("      개인정보 요청알림")
+                            .setPositiveButton("아니오", new DialogInterface.OnClickListener()
+                            {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which)
+                                {
+                                    Log.i("Dialog", "취소");
+                                    snapshot.getReference().update("idrequest",4);
+                                }
+                            })
+                            .setNeutralButton("예", new DialogInterface.OnClickListener()
+                            {
+                                public void onClick(DialogInterface dialog, int which)
+                                {
+
+                                    snapshot.getReference().update("idrequest",3);
+                                }
+                            })
+                            .setCancelable(false) // 백버튼으로 팝업창이 닫히지 않도록 한다.
+                            .show();
+                }
+
+            }
+        });
     }
 
     @Override
@@ -322,6 +369,7 @@ public class ChatFragment extends Fragment {
                 }
                 //users.put(myUid, (long) 0);
                 //document.getReference().update("users", users);
+
             }
         });
     }
@@ -354,6 +402,8 @@ public class ChatFragment extends Fragment {
         data.put("title", null);
         data.put("users", users);
         data.put("board", toTitle);
+        data.put("phone",toPhone);
+        data.put("idrequest",1);
 
         room.set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

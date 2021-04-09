@@ -22,7 +22,6 @@ import com.rahimlis.badgedtablayout.BadgedTabLayout;
 import java.util.HashMap;
 import java.util.Map;
 
-import gujc.dotterPatient.fragment.BoardFragment;
 import gujc.dotterPatient.fragment.ChatRoomFragment;
 import gujc.dotterPatient.fragment.UserFragment;
 import gujc.dotterPatient.fragment.WriteFragment;

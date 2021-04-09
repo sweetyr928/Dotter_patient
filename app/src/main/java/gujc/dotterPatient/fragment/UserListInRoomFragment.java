@@ -1,12 +1,17 @@
 package gujc.dotterPatient.fragment;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +23,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -26,13 +37,18 @@ import java.util.List;
 import java.util.Map;
 
 import gujc.dotterPatient.R;
+import gujc.dotterPatient.chat.ChatActivity;
 import gujc.dotterPatient.chat.SelectUserActivity;
+import gujc.dotterPatient.model.Board;
+import gujc.dotterPatient.model.ChatRoomModel;
 import gujc.dotterPatient.model.UserModel;
 
 public class UserListInRoomFragment extends Fragment {
     private String roomID;
     private List<UserModel> userModels;
     private RecyclerView recyclerView;
+    private FirebaseFirestore db;
+    public int request = 0;
 
     public UserListInRoomFragment() {
     }
@@ -67,13 +83,53 @@ public class UserListInRoomFragment extends Fragment {
         view.findViewById(R.id.addContactBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                Intent intent = new Intent(getActivity(), SelectUserActivity.class);
-                intent.putExtra("roomID", roomID);
-                startActivity(intent);
+                phoneRequest();
             }
         });
 
         return view;
+    }
+
+    void phoneRequest()
+    {
+        System.out.print("phoneRequest start");
+        final DocumentReference rooms = db.getInstance().collection("rooms").document(roomID);
+        rooms.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable final DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    return;
+                }
+
+                ChatRoomModel chatRoomModel = snapshot.toObject(ChatRoomModel.class);
+                request = chatRoomModel.getIdrequest();
+
+                AlertDialog.Builder oDialog = new AlertDialog.Builder(getContext(),
+                        android.R.style.Theme_DeviceDefault_Light_Dialog);
+
+                oDialog.setMessage("본인확인을 위해 전화번호의 공개유무를 선택해주세요!")
+                        .setTitle("     개인정보 요청알림")
+                        .setPositiveButton("비공개", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                snapshot.getReference().update("idrequest",2);
+                            }
+                        })
+                        .setNeutralButton("공개", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                snapshot.getReference().update("idrequest",3);
+                            }
+                        })
+                        .setCancelable(false) // 백버튼으로 팝업창이 닫히지 않도록 한다.
+                        .show();
+
+            }
+        });
     }
 
     public void setUserList(List<UserModel> users) {
