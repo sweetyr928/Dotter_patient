@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import gujc.dotterPatient.fragment.BoardFragment;
+import gujc.dotterPatient.fragment.ChartFragment;
 import gujc.dotterPatient.fragment.ChatRoomFragment;
 import gujc.dotterPatient.fragment.UserFragment;
 import gujc.dotterPatient.fragment.WriteFragment;
@@ -63,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.setIcon(0, R.drawable.account);
         tabLayout.setIcon(1, R.drawable.baseline_chat_black_18dp);
-        tabLayout.setIcon(2, R.drawable.setting);
+        tabLayout.setIcon(2, R.drawable.ic_floatingbutton_chart);
+        tabLayout.setIcon(3,R.drawable.setting);
 
         myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         firestore = FirebaseFirestore.getInstance();
@@ -132,13 +134,14 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case 0: return new WriteFragment();
                 case 1: return new ChatRoomFragment();
+                case 2: return new ChartFragment();
                 default: return new UserFragment();
             }
         }
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
     }
 }

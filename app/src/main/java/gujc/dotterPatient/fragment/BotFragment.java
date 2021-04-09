@@ -143,6 +143,8 @@ public class BotFragment extends Fragment {
                         bcurrent = "결제";
                         arrayboard.add(ucurrent);
                         button1.setText("결제");
+                        button2.setVisibility(View.GONE);
+                        button3.setVisibility(View.GONE);
                         break;
                     }
 
