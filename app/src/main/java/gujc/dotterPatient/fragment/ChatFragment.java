@@ -93,7 +93,6 @@ import okhttp3.Response;
 import static android.app.Activity.RESULT_OK;
 
 public class ChatFragment extends Fragment {
-    //브랜치 테스트1
     private static final int PICK_FROM_ALBUM = 1;
     private static final int PICK_FROM_FILE = 2;
     private static String rootPath = Util9.getRootPath() + "/DirectTalk9/";
@@ -114,13 +113,13 @@ public class ChatFragment extends Fragment {
 
     private ListenerRegistration listenerRegistration;
     private FirebaseFirestore firestore;
-    private FirebaseFirestore db;
     private StorageReference storageReference;
     private LinearLayoutManager linearLayoutManager;
 
     private ProgressDialog progressDialog = null;
     private Integer userCount = 0;
     private String broomid = null;
+    public int request = 0;
 
     public ChatFragment() {
     }
@@ -140,7 +139,6 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
-
         recyclerView = view.findViewById(R.id.recyclerView);
         linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -254,7 +252,6 @@ public class ChatFragment extends Fragment {
                 }
             }
         });
-        
         return view;
     }
 
@@ -271,7 +268,7 @@ public class ChatFragment extends Fragment {
                 }
 
                 ChatRoomModel chatRoomModel = snapshot.toObject(ChatRoomModel.class);
-                int request = chatRoomModel.getRequest();
+                request = chatRoomModel.getIdrequest();
 
                 if(request==2)
                 {
@@ -286,7 +283,7 @@ public class ChatFragment extends Fragment {
                                 public void onClick(DialogInterface dialog, int which)
                                 {
                                     Log.i("Dialog", "취소");
-                                    snapshot.getReference().update("request",4);
+                                    snapshot.getReference().update("idrequest",4);
                                 }
                             })
                             .setNeutralButton("예", new DialogInterface.OnClickListener()
@@ -294,7 +291,7 @@ public class ChatFragment extends Fragment {
                                 public void onClick(DialogInterface dialog, int which)
                                 {
 
-                                    snapshot.getReference().update("request",3);
+                                    snapshot.getReference().update("idrequest",3);
                                 }
                             })
                             .setCancelable(false) // 백버튼으로 팝업창이 닫히지 않도록 한다.
@@ -406,7 +403,7 @@ public class ChatFragment extends Fragment {
         data.put("users", users);
         data.put("board", toTitle);
         data.put("phone",toPhone);
-        data.put("request",1);
+        data.put("idrequest",1);
 
         room.set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

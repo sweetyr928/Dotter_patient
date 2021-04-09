@@ -47,7 +47,8 @@ public class UserListInRoomFragment extends Fragment {
     private String roomID;
     private List<UserModel> userModels;
     private RecyclerView recyclerView;
-    private FirebaseFirestore firestore=null;
+    private FirebaseFirestore db;
+    public int request = 0;
 
     public UserListInRoomFragment() {
     }
@@ -82,13 +83,53 @@ public class UserListInRoomFragment extends Fragment {
         view.findViewById(R.id.addContactBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                Intent intent = new Intent(getActivity(), SelectUserActivity.class);
-                intent.putExtra("roomID", roomID);
-                startActivity(intent);
+                phoneRequest();
             }
         });
 
         return view;
+    }
+
+    void phoneRequest()
+    {
+        System.out.print("phoneRequest start");
+        final DocumentReference rooms = db.getInstance().collection("rooms").document(roomID);
+        rooms.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable final DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    return;
+                }
+
+                ChatRoomModel chatRoomModel = snapshot.toObject(ChatRoomModel.class);
+                request = chatRoomModel.getIdrequest();
+
+                AlertDialog.Builder oDialog = new AlertDialog.Builder(getContext(),
+                        android.R.style.Theme_DeviceDefault_Light_Dialog);
+
+                oDialog.setMessage("본인확인을 위해 전화번호의 공개유무를 선택해주세요!")
+                        .setTitle("     개인정보 요청알림")
+                        .setPositiveButton("비공개", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                snapshot.getReference().update("idrequest",2);
+                            }
+                        })
+                        .setNeutralButton("공개", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                snapshot.getReference().update("idrequest",3);
+                            }
+                        })
+                        .setCancelable(false) // 백버튼으로 팝업창이 닫히지 않도록 한다.
+                        .show();
+
+            }
+        });
     }
 
     public void setUserList(List<UserModel> users) {

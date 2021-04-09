@@ -9,18 +9,19 @@ public class ChatRoomModel {
     private Integer userCount;
     private Integer unreadCount;
     private String board;
-    private int request;
+    public int idrequest;
     private String phone;
 
     public String getPhone() { return phone; }
 
     public void setPhone(String phone) { this.phone = phone; }
 
-    public void setRequest(int request) {
+    public int getIdrequest() {
+        return idrequest;
     }
 
-    public int getRequest() {
-        return request;
+    public void setIdrequest(int idrequest) {
+        this.idrequest = idrequest;
     }
 
     public String getRoomID() {
