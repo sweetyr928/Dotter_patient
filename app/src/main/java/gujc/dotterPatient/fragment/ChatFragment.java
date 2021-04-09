@@ -118,8 +118,6 @@ public class ChatFragment extends Fragment {
 
     private ProgressDialog progressDialog = null;
     private Integer userCount = 0;
-    private String broomid = null;
-    public int request = 0;
 
     public ChatFragment() {
     }
@@ -255,52 +253,6 @@ public class ChatFragment extends Fragment {
         return view;
     }
 
-    void phoneRequest()
-    {
-        System.out.print("phoneRequest start");
-        final DocumentReference rooms = firestore.collection("rooms").document(roomID);
-        rooms.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable final DocumentSnapshot snapshot,
-                                @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    return;
-                }
-
-                ChatRoomModel chatRoomModel = snapshot.toObject(ChatRoomModel.class);
-                request = chatRoomModel.getIdrequest();
-
-                if(request==2)
-                {
-                    AlertDialog.Builder oDialog = new AlertDialog.Builder(getContext(),
-                            android.R.style.Theme_DeviceDefault_Light_Dialog);
-
-                    oDialog.setMessage("전화를 통해 본인확인을 요청하였습니다. 수락하시겠습니까?")
-                            .setTitle("      개인정보 요청알림")
-                            .setPositiveButton("아니오", new DialogInterface.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which)
-                                {
-                                    Log.i("Dialog", "취소");
-                                    snapshot.getReference().update("idrequest",4);
-                                }
-                            })
-                            .setNeutralButton("예", new DialogInterface.OnClickListener()
-                            {
-                                public void onClick(DialogInterface dialog, int which)
-                                {
-
-                                    snapshot.getReference().update("idrequest",3);
-                                }
-                            })
-                            .setCancelable(false) // 백버튼으로 팝업창이 닫히지 않도록 한다.
-                            .show();
-                }
-
-            }
-        });
-    }
 
     @Override
     public void onDestroyView() {
@@ -486,6 +438,7 @@ public class ChatFragment extends Fragment {
             }
 
         });
+
     }
 
     //알림보내는 함수
