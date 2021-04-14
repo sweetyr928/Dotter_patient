@@ -92,7 +92,6 @@ public class UserListInRoomFragment extends Fragment {
 
     void phoneRequest()
     {
-        System.out.print("phoneRequest start");
         final DocumentReference rooms = db.getInstance().collection("rooms").document(roomID);
         rooms.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -105,29 +104,28 @@ public class UserListInRoomFragment extends Fragment {
                 ChatRoomModel chatRoomModel = snapshot.toObject(ChatRoomModel.class);
                 request = chatRoomModel.getIdrequest();
 
-                AlertDialog.Builder oDialog = new AlertDialog.Builder(getContext(),
-                        android.R.style.Theme_DeviceDefault_Light_Dialog);
+                if(request==1) {
+                    AlertDialog.Builder oDialog = new AlertDialog.Builder(getContext(),
+                            android.R.style.Theme_DeviceDefault_Light_Dialog);
 
-                oDialog.setMessage("본인확인을 위해 전화번호의 공개유무를 선택해주세요!")
-                        .setTitle("     개인정보 요청알림")
-                        .setPositiveButton("비공개", new DialogInterface.OnClickListener()
-                        {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which)
-                            {
-                                snapshot.getReference().update("idrequest",2);
-                            }
-                        })
-                        .setNeutralButton("공개", new DialogInterface.OnClickListener()
-                        {
-                            public void onClick(DialogInterface dialog, int which)
-                            {
-                                snapshot.getReference().update("idrequest",3);
-                            }
-                        })
-                        .setCancelable(false) // 백버튼으로 팝업창이 닫히지 않도록 한다.
-                        .show();
-
+                    oDialog.setMessage("본인확인을 위해 전화번호의 공개유무를 선택해주세요.")
+                            .setTitle("     개인정보 요청알림")
+                            .setPositiveButton("비공개", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    snapshot.getReference().update("idrequest", 2);
+                                    Toast.makeText(getContext(), "전화번호가 비공개 처리 되었습니다.", Toast.LENGTH_LONG).show();
+                                }
+                            })
+                            .setNeutralButton("공개", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    snapshot.getReference().update("idrequest", 3);
+                                    Toast.makeText(getContext(), "전화번호가 공개되었습니다.", Toast.LENGTH_LONG).show();
+                                }
+                            })
+                            .setCancelable(false) // 백버튼으로 팝업창이 닫히지 않도록 한다.
+                            .show();
+                }
             }
         });
     }

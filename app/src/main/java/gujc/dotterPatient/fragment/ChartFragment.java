@@ -75,7 +75,7 @@ public class ChartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
         recyclerView = view.findViewById(R.id.recyclerview);
         firestoreAdapter = new Adapter(FirebaseFirestore.getInstance()
-                .collection("Board").whereEqualTo("id", myuid).orderBy("timestamp"));
+                .collection("Board").whereEqualTo("match", true).whereEqualTo("id", myuid).orderBy("timestamp"));
 
         LinearLayoutManager manager = new LinearLayoutManager(inflater.getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
