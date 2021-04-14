@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChartinfoActivity"></activity>
+        <activity
+            android:name=".ChartinfoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="gujc.dotterPatient.bot.BotActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name="gujc.dotterPatient.SignupActivity"/>

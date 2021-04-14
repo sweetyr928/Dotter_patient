@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="top"
     android:orientation="vertical"
     android:padding="15dp"
     tools:context=".ChartinfoActivity">
@@ -87,7 +87,7 @@
         android:id="@+id/boardname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="증상"
+        android:hint="문진표"
         android:textSize="17dp"
         android:inputType="text" />
 
@@ -172,6 +172,7 @@
             android:textSize="17dp"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -179,8 +180,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:background="@android:color/darker_gray" />
-
-
 
     <Button
         android:id="@+id/receipt"
