@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/mainFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="100dp"
+            android:text="내 정보"
+            android:textSize="35dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/toUserinfobtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="190dp"
+            android:background="#00ff0000"
+            android:gravity="center|left"
+            android:text="계정 관리"
+            android:textColor="#706262"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/toPayinfobtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="250dp"
+            android:background="#00ff0000"
+            android:gravity="center|left"
+            android:text="결제수단 정보"
+            android:textColor="#706262"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/toQnAbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="310dp"
+            android:background="#00ff0000"
+            android:gravity="center|left"
+            android:text="문의사항"
+            android:textColor="#706262"
+            android:textSize="20dp" />
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

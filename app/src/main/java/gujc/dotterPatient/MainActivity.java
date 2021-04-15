@@ -1,6 +1,7 @@
 package gujc.dotterPatient;
 
 import android.content.Intent;
+import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ import java.util.Map;
 import gujc.dotterPatient.fragment.BoardFragment;
 import gujc.dotterPatient.fragment.ChartFragment;
 import gujc.dotterPatient.fragment.ChatRoomFragment;
+import gujc.dotterPatient.fragment.InfoFragment;
 import gujc.dotterPatient.fragment.UserFragment;
 import gujc.dotterPatient.fragment.WriteFragment;
 
@@ -135,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                 case 0: return new WriteFragment();
                 case 1: return new ChatRoomFragment();
                 case 2: return new ChartFragment();
-                default: return new UserFragment();
+                default: return new InfoFragment();
             }
         }
 
