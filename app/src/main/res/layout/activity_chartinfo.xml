@@ -90,6 +90,7 @@
         android:layout_height="wrap_content"
         android:hint="문진표"
         android:textSize="17dp"
+        android:layout_marginBottom="10dp"
         android:inputType="text" />
 
     <com.google.android.material.textfield.TextInputLayout

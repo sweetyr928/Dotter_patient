@@ -24,8 +24,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\AURIOS~1\AppData\Local\Temp\baseline_article_24.xml" />
-                                                <entry key="opacityPercent" value="80" />
+                                                <entry key="imagePath" value="C:\Users\AURIOS~1\AppData\Local\Temp\baseline_add_photo_alternate_24.xml" />
+                                                <entry key="opacityPercent" value="60" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -36,7 +36,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/article/baseline_article_24.xml" />
+                                                <entry key="url" value="file:/$PROJECT_DIR$/../../Aurios%20Medical/AppData/Local/Android/Sdk/icons/material/materialicons/add_photo_alternate/baseline_add_photo_alternate_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -80,8 +80,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_floatingbutton_chart" />
-                                      <entry key="theme" value="HOLO_DARK" />
+                                      <entry key="outputName" value="ic_floatingbutton_addimage" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -317,6 +316,11 @@
                 </map>
               </option>
             </PersistentState>
+          </value>
+        </entry>
+        <entry key="vectorWizard">
+          <value>
+            <PersistentState />
           </value>
         </entry>
       </map>

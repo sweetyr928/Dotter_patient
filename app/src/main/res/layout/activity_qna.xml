@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 
     <FrameLayout
         android:id="@+id/mainFragment"
@@ -15,49 +13,62 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="50dp"
-            android:text="내 정보"
-            android:textSize="35dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="40dp"
+            android:text="문의사항"
+            android:textSize="25dp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/toUserinfobtn"
+            android:id="@+id/toAnnouncement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="100dp"
             android:background="#00ff0000"
             android:gravity="center|left"
-            android:text="계정 관리"
+            android:text="공지사항"
             android:textColor="#706262"
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/toPayinfobtn"
+            android:id="@+id/toFrequentQ"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="160dp"
             android:background="#00ff0000"
             android:gravity="center|left"
-            android:text="결제수단 정보"
+            android:text="자주 묻는 질문"
             android:textColor="#706262"
             android:textSize="20dp" />
 
         <Button
-            android:id="@+id/toQnAbtn"
+            android:id="@+id/toPersonalQ"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="260dp"
+            android:layout_marginTop="220dp"
             android:background="#00ff0000"
             android:gravity="center|left"
-            android:text="문의사항"
+            android:text="1:1 문의"
+            android:textColor="#706262"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/toServiceTerm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="280dp"
+            android:background="#00ff0000"
+            android:gravity="center|left"
+            android:text="서비스 이용 약관"
             android:textColor="#706262"
             android:textSize="20dp" />
 

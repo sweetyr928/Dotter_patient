@@ -20,8 +20,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="gujc.dotterPatient.bot.BotActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="gujc.dotterPatient.SignupActivity"/>
-        <activity android:name="gujc.dotterPatient.InfoActivity"/>
+        <activity android:name="gujc.dotterPatient.SignupActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="gujc.dotterPatient.QnAActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="gujc.dotterPatient.InfoActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="gujc.dotterPatient.SplashActivity"
             android:label="@string/app_name"
@@ -41,8 +45,10 @@
         <activity
             android:name="gujc.dotterPatient.chat.ChatActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="gujc.dotterPatient.chat.SelectUserActivity" />
-        <activity android:name="gujc.dotterPatient.UserPWActivity" />
+        <activity android:name="gujc.dotterPatient.chat.SelectUserActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="gujc.dotterPatient.UserPWActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="gujc.dotterPatient.photoview.ViewPagerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
