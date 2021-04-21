@@ -2,11 +2,13 @@ package gujc.dotterPatient.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PointF;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -74,17 +76,54 @@ public class ChartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
         recyclerView = view.findViewById(R.id.recyclerview);
-        firestoreAdapter = new Adapter(FirebaseFirestore.getInstance()
-                .collection("Board").whereEqualTo("match", true).whereEqualTo("id", myuid).orderBy("timestamp"));
-
         LinearLayoutManager manager = new LinearLayoutManager(inflater.getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         manager.setReverseLayout(true);
         manager.setStackFromEnd(false);
-        recyclerView.setLayoutManager(manager); // timestamp 순으로 출력
+        recyclerView.setLayoutManager(manager);
+        firestoreAdapter = new Adapter(FirebaseFirestore.getInstance()
+                .collection("Board").whereEqualTo("match", true).whereEqualTo("id", myuid).orderBy("timestamp"));
         recyclerView.setAdapter(firestoreAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManagerWithSmoothScroller(getContext()));
+        recyclerView.smoothScrollToPosition(0);
 
         return view;
+    }
+    public class LinearLayoutManagerWithSmoothScroller extends LinearLayoutManager {
+
+        public LinearLayoutManagerWithSmoothScroller(Context context) {
+            super(context, VERTICAL, false);
+        }
+
+        public LinearLayoutManagerWithSmoothScroller(Context context, int orientation, boolean reverseLayout) {
+            super(context, orientation, reverseLayout);
+        }
+
+        @Override
+        public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state,
+                                           int position) {
+            RecyclerView.SmoothScroller smoothScroller = new TopSnappedSmoothScroller(recyclerView.getContext());
+            smoothScroller.setTargetPosition(position);
+            startSmoothScroll(smoothScroller);
+        }
+
+        private class TopSnappedSmoothScroller extends LinearSmoothScroller {
+            public TopSnappedSmoothScroller(Context context) {
+                super(context);
+
+            }
+
+            @Override
+            public PointF computeScrollVectorForPosition(int targetPosition) {
+                return LinearLayoutManagerWithSmoothScroller.this
+                        .computeScrollVectorForPosition(targetPosition);
+            }
+
+            @Override
+            protected int getVerticalSnapPreference() {
+                return SNAP_TO_START;
+            }
+        }
     }
 
     class Adapter extends FirestoreAdapter<Holder> {
