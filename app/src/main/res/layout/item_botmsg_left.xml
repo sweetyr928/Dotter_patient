@@ -22,7 +22,7 @@
                 android:id="@+id/bot_photo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:background="@drawable/user"/>
         </LinearLayout>
 
         <LinearLayout

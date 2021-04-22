@@ -86,7 +86,7 @@ public class BotFragment extends Fragment {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 user = documentSnapshot.toObject(UserModel.class);
-                Chatbot chatbot = new Chatbot("bot", "안녕하세요" + user.getUsernm() + "님이 맞나요?");
+                Chatbot chatbot = new Chatbot("bot", "안녕하세요 " + user.getUsernm() + " 님이 맞나요?");
                 arrayList.add(chatbot);
                 botAdapter.notifyDataSetChanged();
             }
@@ -95,7 +95,7 @@ public class BotFragment extends Fragment {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Chatbot chatbot = new Chatbot(fuser, mcurrent);
+                Chatbot chatbot = new Chatbot("나", mcurrent);
                 switch (chatbot.getCurrent()) {
                     case "nmtest": {
                         mcurrent = "nmyes";
@@ -259,7 +259,7 @@ public class BotFragment extends Fragment {
                         break;
                     }
                 }
-                chatbot = new Chatbot(fuser, ucurrent);
+                chatbot = new Chatbot("나", ucurrent);
                 Chatbot chatbot1 = new Chatbot("bot", bcurrent);
                 if (ucurrent.equals("")) {
                     arrayList.add(chatbot1);
@@ -280,7 +280,7 @@ public class BotFragment extends Fragment {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Chatbot chatbot = new Chatbot(fuser, mcurrent);
+                Chatbot chatbot = new Chatbot("나", mcurrent);
                 switch (chatbot.getCurrent()) {
                     case "nmtest": {
                         mcurrent = "nmno";
@@ -378,7 +378,7 @@ public class BotFragment extends Fragment {
                         break;
                     }
                 }
-                chatbot = new Chatbot(fuser, ucurrent);
+                chatbot = new Chatbot("나", ucurrent);
                 Chatbot chatbot1 = new Chatbot("bot", bcurrent);
                 if (ucurrent.equals("")) {
                     arrayList.add(chatbot1);
@@ -396,7 +396,7 @@ public class BotFragment extends Fragment {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Chatbot chatbot = new Chatbot(fuser, mcurrent);
+                Chatbot chatbot = new Chatbot("나", mcurrent);
                 switch (chatbot.getCurrent()) {
                     case "dnl": {
                         mcurrent = "stomach";
@@ -423,7 +423,7 @@ public class BotFragment extends Fragment {
                         break;
                     }
                 }
-                chatbot = new Chatbot(fuser, ucurrent);
+                chatbot = new Chatbot("나", ucurrent);
                 Chatbot chatbot1 = new Chatbot("bot", bcurrent);
                 if (ucurrent.equals("")) {
                     arrayList.add(chatbot1);

@@ -45,8 +45,7 @@
         <activity
             android:name="gujc.dotterPatient.chat.ChatActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="gujc.dotterPatient.chat.SelectUserActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="gujc.dotterPatient.chat.SelectUserActivity"/>
         <activity android:name="gujc.dotterPatient.UserPWActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity

@@ -122,13 +122,13 @@ public class ChatFragment extends Fragment {
     public ChatFragment() {
     }
 
-    public static final ChatFragment getInstance(String toUid, String roomID, String toTitle,String toPhone) {
+    public static final ChatFragment getInstance(String toUid, String roomID, String toPhone,String toTitle) {
         ChatFragment f = new ChatFragment();
         Bundle bdl = new Bundle();
         bdl.putString("toUid", toUid);
         bdl.putString("roomID", roomID);
-        bdl.putString("toTitle", toTitle);
         bdl.putString("toPhone",toPhone);
+        bdl.putString("toTitle", toTitle);
         f.setArguments(bdl);
         return f;
     }

@@ -100,7 +100,7 @@ public class BotAdapter extends RecyclerView.Adapter<BotAdapter.Holder> {
     @Override
     public int getItemViewType(int position) {
         String fuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        if (arrayList.get(position).getName().equals(fuser)){
+        if (arrayList.get(position).getName().equals("나")){
             return msgtype_right;
         }else {
             return msgtype_left;

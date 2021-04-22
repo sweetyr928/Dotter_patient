@@ -62,7 +62,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
         // chatting area
-        chatFragment = ChatFragment.getInstance(toUid, roomID,toTitle,toPhone);
+        chatFragment = ChatFragment.getInstance(toUid, roomID,toPhone,toTitle);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.mainFragment, chatFragment )
