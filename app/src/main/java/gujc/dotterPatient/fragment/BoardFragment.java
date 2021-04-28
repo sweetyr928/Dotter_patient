@@ -256,7 +256,7 @@ public class BoardFragment extends Fragment {
                     intent.putExtra("roomID", bid);
                     intent.putExtra("toTitle",board.getTitle());
                     startActivity(intent);
-                    Toast.makeText(getContext(), "매칭이 수락되었습니다.", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(), "매칭이 수락되었습니다.", Toast.LENGTH_LONG).show();
                 }
                 else if(status==2&& !board.isMatch()){
                     pd.dismiss();
