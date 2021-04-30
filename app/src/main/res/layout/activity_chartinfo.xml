@@ -117,9 +117,18 @@
             android:layout_height="wrap_content"
             android:hint="진료노트"
             android:textSize="17dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="노트"
+        android:textSize="17dp"
+        android:layout_marginBottom="10dp"
+        android:inputType="text" />
 
     <LinearLayout
         android:layout_width="fill_parent"

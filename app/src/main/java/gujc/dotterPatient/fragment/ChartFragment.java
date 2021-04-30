@@ -121,6 +121,7 @@ public class ChartFragment extends Fragment {
                     intent.putExtra("timestamp", timestamp1);
                     intent.putExtra("board", board.getTitle());
                     intent.putExtra("phone", board.getName());
+                    intent.putExtra("note",board.getNote());
 
                     startActivity(intent);
                 }

@@ -20,6 +20,7 @@ public class ChartinfoActivity extends AppCompatActivity {
     private TextView timestamp;
     private TextView board;
     private TextView chartnote;
+    private TextView note;
     private Button receipt;
 
     @Override
@@ -33,6 +34,7 @@ public class ChartinfoActivity extends AppCompatActivity {
         chartnote = findViewById(R.id.chartnote);
         board = findViewById(R.id.board);
         receipt = findViewById(R.id.receipt);
+        note = findViewById(R.id.note);
 
         receipt.setOnClickListener(receiptclick);
 
@@ -40,8 +42,7 @@ public class ChartinfoActivity extends AppCompatActivity {
         hospital.setText(getIntent().getStringExtra("hospital"));
         timestamp.setText("진료시간 " + getIntent().getStringExtra("timestamp"));
         board.setText(getIntent().getStringExtra("board"));
-
-
+        note.setText(getIntent().getStringExtra("note"));
     }
 
     Button.OnClickListener receiptclick = new View.OnClickListener() {
